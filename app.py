@@ -33,6 +33,15 @@ def admin_panel():
     conn.close()
     
     return render_template('admin.html', orders=orders)
+@app.route('/delete-oldest', methods=['POST'])
+def delete_oldest():
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    # Deletes the row with the smallest ID
+    cursor.execute('DELETE FROM orders WHERE id = (SELECT MIN(id) FROM orders)')
+    conn.commit()
+    conn.close()
+    return redirect('/admin')
 @app.route('/')
 def home():
     return render_template('index.html')
