@@ -11,6 +11,7 @@ db_path=os.getenv('DATABASE_PATH','coffee_shop.db')
 def init_db():
     conn=sqlite3.connect(db_path)
     cursor=conn.cursor()
+    cursor.execute('DROP TABLE IF EXISTS orders')
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS orders(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,7 +21,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-init_db()
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -62,7 +63,7 @@ def order_page():
 
 
 import os
-
 if __name__ == '__main__':
+    init_db()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
