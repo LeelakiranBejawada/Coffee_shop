@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Orders - Admin Panel</title>
+    <meta http-equiv="refresh" content="10"> 
+</head>
+<body>
+    <h1>☕ Live Coffee Orders</h1>
+    <p class="refresh-notice">⚡ Page updates automatically every 10 seconds.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Item</th>
+                <th>Quantity / Size</th>
+                <th>Topping</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align:center;">No orders submitted yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
