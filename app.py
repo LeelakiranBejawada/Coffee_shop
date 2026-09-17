@@ -63,6 +63,5 @@ def order_page():
 
 if __name__ == '__main__':
     init_db()
-    
-    app_port=int(os.getenv('PORT',10000))
-    app.run(host="0.0.0.0", port=app_port,debug=False)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
