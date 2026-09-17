@@ -23,6 +23,16 @@ def init_db():
     conn.close()
 
 init_db()
+@app.route('/admin')
+def admin_panel():
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    # Fetch all orders ordered by newest first
+    cursor.execute('SELECT id, Item, Quantity, Topping FROM orders ORDER BY id DESC')
+    orders = cursor.fetchall()
+    conn.close()
+    
+    return render_template('admin.html', orders=orders)
 @app.route('/')
 def home():
     return render_template('index.html')
