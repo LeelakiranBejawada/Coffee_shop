@@ -1,5 +1,0 @@
-requirements:type of flask(currently using flask 3.0.3)->a production WSGI server like gunicorn
-->Github free account and upload the python project repository 
-->Render.com in free account,click on NEW+ and select the web services
-->connect your github responsary
-set th start command(gunicorn app:app) ->click Deploy 
