@@ -12,6 +12,7 @@ def init_db():
     conn=sqlite3.connect(db_path)
     cursor=conn.cursor()
     cursor.execute('DROP TABLE IF EXISTS orders')
+    
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS orders(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +22,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-
+init_db()
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -49,19 +50,17 @@ def order_page():
         print("--------------------------\n")
         
 
-        return jsonify({
-            "Status" : "success",
-            "Massage" : "Order Placed",
-            "Order ID" : Order_ID,
-            "Item" : coffee_choice,
-            "Quantity" : size_choice,
-            "Toppings" : topping_choice})
-            
-
+        return render_template(
+            'order_success.html',
+            order_id=Order_ID,
+            item=coffee_choice,
+            quantity=size_choice,
+            topping=topping_choice
+        )
 
     return render_template('index.html')
 
-init_db()
+
 import os
 if __name__ == '__main__':
     
